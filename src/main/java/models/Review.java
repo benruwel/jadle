@@ -1,17 +1,24 @@
 package models;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
 public class Review {
     private String content;
     private String writtenBy;
     private int rating;
     private int id;
     private int restaurantId; //will be used to connect Restaurant to Review (one-to-many)
+    private long createdat;
+    private String formattedCreatedAt;
 
     public Review(String content, String writtenBy, int rating, int restaurantId) {
         this.content = content;
         this.writtenBy = writtenBy;
         this.rating = rating;
         this.restaurantId = restaurantId;
+        this.createdat = System.currentTimeMillis();
+        setFormattedCreatedAt();
     }
 
     public void setContent(String content) {
@@ -54,6 +61,27 @@ public class Review {
         return restaurantId;
     }
 
+    public long getCreatedAt() {
+        return createdat;
+    }
+
+    public void setCreatedAt() {
+        this.createdat = System.currentTimeMillis();
+    }
+
+    public String getFormattedCreatedAt(){
+        Date date = new Date(createdat);
+        String datePatternToUse = "MM/dd/yyyy @ K:mm a"; //see https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html
+        SimpleDateFormat sdf = new SimpleDateFormat(datePatternToUse);
+        return sdf.format(date);
+    }
+
+    public void setFormattedCreatedAt(){
+        Date date = new Date(this.createdat);
+        String datePatternToUse = "MM/dd/yyyy @ K:mm a";
+        SimpleDateFormat sdf = new SimpleDateFormat(datePatternToUse);
+        this.formattedCreatedAt = sdf.format(date);
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

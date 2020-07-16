@@ -49,7 +49,7 @@ public class App {
             }
         });
 
-        get("/restaurants/:id", "application/json", (req, res) -> { //accept a request in format JSON from an app
+        get("/restaurants/:id", "application/json", (req, res) -> {
             int restaurantId = Integer.parseInt(req.params("id"));
             Restaurant restaurantToFind = restaurantDao.findById(restaurantId);
 
