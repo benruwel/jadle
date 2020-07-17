@@ -12,6 +12,9 @@ public interface ReviewDao {
     List<Review> getAll();
     List<Review> getAllReviewsByRestaurant(int restaurantId);
 
+    //sorting
+    List<Review> getAllReviewsByRestaurantSortedNewestToOldest(int restaurantId);
+
     //update
     //omit for now
 

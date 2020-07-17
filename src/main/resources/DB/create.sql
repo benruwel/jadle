@@ -1,7 +1,8 @@
-SET MODE PostgreSQL;
+CREATE DATABASE jadle;
+\c jadle;
 
 CREATE TABLE IF NOT EXISTS restaurants (
- id int PRIMARY KEY auto_increment,
+ id SERIAL PRIMARY KEY,
  name VARCHAR,
  address VARCHAR,
  zipcode VARCHAR,
@@ -11,12 +12,12 @@ CREATE TABLE IF NOT EXISTS restaurants (
 );
 
 CREATE TABLE IF NOT EXISTS foodtypes (
- id int PRIMARY KEY auto_increment,
+ id SERIAL PRIMARY KEY,
  name VARCHAR
 );
 
 CREATE TABLE IF NOT EXISTS reviews (
- id int PRIMARY KEY auto_increment,
+ id SERIAL PRIMARY KEY,
  writtenby VARCHAR,
  content VARCHAR,
  rating VARCHAR,
@@ -25,7 +26,9 @@ CREATE TABLE IF NOT EXISTS reviews (
 );
 
 CREATE TABLE IF NOT EXISTS restaurants_foodtypes (
- id int PRIMARY KEY auto_increment,
+ id SERIAL PRIMARY KEY,
  foodtypeid INTEGER,
  restaurantid INTEGER
 );
+
+CREATE DATABASE jadle_test WITH TEMPLATE jadle;

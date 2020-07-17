@@ -85,6 +85,25 @@ public class Sql2oReviewDaoTest {
         assertEquals(creationTime, savedTime);
     }
 
+    @Test
+    public void reviewsAreReturnedInCorrectOrder() throws Exception {
+        Restaurant testRestaurant = setupRestaurant();
+        restaurantDao.add(testRestaurant);
+        Review testReview = new Review("Captain Kirk", "foodcoma", 3, testRestaurant.getId());
+        reviewDao.add(testReview);
+        try {
+            Thread.sleep(2000);
+        }
+        catch (InterruptedException ex){
+            ex.printStackTrace();
+        }
+
+        Review testSecondReview = new Review("Mr Spock", "gandhi wanabi", 4, testRestaurant.getId());
+        reviewDao.add(testSecondReview);
+
+        assertEquals("passable", reviewDao.getAllReviewsByRestaurantSortedNewestToOldest(testRestaurant.getId()).get(0).getContent());
+    }
+
 
     //helpers
 
